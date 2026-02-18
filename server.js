@@ -5,6 +5,10 @@ const port = process.env.PORT || 8000
 
 const app = express()
 
+// body parser middleware
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 // Setup static folder
 // app.use(express.(path.join(__dirname, 'public')))
 
