@@ -17,15 +17,20 @@ app.get('/api/posts', (req, res) => {
   const limit = parseInt(req.query.limit)
 
   if (!isNaN(limit) && limit > 0) {
-    res.json(posts.slice(0, limit))
+    res.status(200).json(posts.slice(0, limit))
   } else {
-    res.json(posts)
+    res.status(200).json(posts)
   }
 })
 // Get a single post
 app.get('/api/posts/:id', (req, res) => {
   const id = parseInt(req.params.id)
-  res.json(posts.filter((post) => post.id === id)) // if its id is equal to id past in then respond w/ that
+  const post = posts.find((post) => post.id === id)
+  if (!post) {
+    res.status(404).json({ msg: `A post with the id of ${id} was not found` })
+  } else {
+    res.status(200).json(post)
+  }
 })
 
 app.listen(8000, () => console.log(`Server is running on port ${port}`))
