@@ -12,8 +12,14 @@ let posts = [
   { id: 2, title: 'Post two'},
   { id: 3, title: 'Post three'}
 ]
+// get all posts
 app.get('/api/posts', (req, res) => {
   res.json(posts)
+})
+// Get a single post
+app.get('/api/posts/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  res.json(posts.filter((post) => post.id === id)) // if its id is equal to id past in then respond w/ that
 })
 
 app.listen(8000, () => console.log(`Server is running on port ${port}`))
