@@ -7,7 +7,8 @@ let posts = [
   { id: 3, title: 'Post three'}
 ]
 
-// get all posts
+
+// Fet all posts
 router.get('/', (req, res) => {
   const limit = parseInt(req.query.limit)
 
