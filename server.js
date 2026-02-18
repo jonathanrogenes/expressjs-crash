@@ -4,7 +4,7 @@ const port = process.env.PORT || 8000
 
 const app = express()
 
-// setup static folder
+// Setup static folder
 // app.use(express.(path.join(__dirname, 'public')))
 
 let posts = [
@@ -14,7 +14,13 @@ let posts = [
 ]
 // get all posts
 app.get('/api/posts', (req, res) => {
-  res.json(posts)
+  const limit = parseInt(req.query.limit)
+
+  if (!isNaN(limit) && limit > 0) {
+    res.json(posts.slice(0, limit))
+  } else {
+    res.json(posts)
+  }
 })
 // Get a single post
 app.get('/api/posts/:id', (req, res) => {
